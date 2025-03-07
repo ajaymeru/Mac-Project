@@ -1,0 +1,11 @@
+.status-card-body {
+    background-color: rgb(98, 98, 98);
+    color: white;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+
+.status-card-body:hover {
+    background-color: white;
+    color: black;
+}

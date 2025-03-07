@@ -70,10 +70,28 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
               <p className='actualText'>Create Activity</p>
             </div>
           </Link>
+          <Link to="/app/edit-activity" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/edit-activity' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+            <MdOutlinePersonAdd className='icon' />
+              <p className='actualText'>Activity Edit(Client)</p>
+            </div>
+          </Link>
           <Link to="/app/manage-activities" onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/manage-activities' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdOutlineGroup className='icon' />
               <p className='actualText'>Manage Activities</p>
+            </div>
+          </Link>
+          <Link to="/app/manage-activitie" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/manage-activitie' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+              <MdOutlineGroup className='icon' />
+              <p className='actualText'>Activity Summary(Client )</p>
+            </div>
+          </Link>
+          <Link to="/app/manage-activity2" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/manage-activity2' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+              <MdOutlineGroup className='icon' />
+              <p className='actualText'>Activity Summary(Client-2)</p>
             </div>
           </Link>
           <Link to="/app/activity-summary" onClick={() => {closeSideMenu()}} className="sidebar-link">
@@ -132,6 +150,12 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
               <p className='actualText'>Create Activity</p>
             </div>
           </Link>
+          {/* <Link to="/app/edit-activity" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/edit-activity' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+            <MdOutlinePersonAdd className='icon' />
+              <p className='actualText'>Activity Edit(Client)</p>
+            </div>
+          </Link> */}
           <Link to="/app/manage-activities" onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/manage-activities' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdOutlineGroup className='icon' />

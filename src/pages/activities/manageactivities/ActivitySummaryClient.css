@@ -1,0 +1,73 @@
+.ActivitySummaryClient {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.filters-data {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 45%;
+    padding: 2vh 2vw;
+    
+}
+
+.filters h4 {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+}
+
+.field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 0;
+}
+
+.field label {
+    flex: 1;
+}
+
+.field input {
+    flex: 1;
+    padding: 2px 5px;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    /* gap: 2px; */
+    width: 45%;
+    padding: 2vh 2vw;
+}
+
+.status {
+    display: flex;
+    /* gap: 10px; */
+    color: white;
+    align-items: center;
+    border: 1px solid black;
+
+}
+
+.status-name {
+    background-color: rgb(98, 98, 98);
+    flex: 0.4;
+    padding: 1vh 1vw;
+
+}
+
+.status-count {
+    color: black;
+    flex: 0.5;
+    padding-left: 1vw;
+}

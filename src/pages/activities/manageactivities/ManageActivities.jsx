@@ -31,11 +31,17 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
     },
   },
   '& .MuiInputLabel-root': {
-    color: '#000', // Set the label color to black
+    color: 'gray', // Set the label color to black
+    fontSize: '14px',
   },
   '& .MuiInputLabel-root.Mui-focused': {
     color: '#000', // Keep the label black even when focused
   },
+  '& .MuiInputBase-input': {
+    color: 'gray !important', 
+    padding: '10px 14px',
+  },
+  
 }));
 const CustomSelect = styled(Select)(({ theme }) => ({
   '& .MuiOutlinedInput-notchedOutline': {
@@ -276,7 +282,10 @@ function ManageActivities({ navigation }) {
                   label="Vendor Name"
                   variant="outlined"
                   autoComplete="off"
-
+                  sx={{color:"gray"}}
+                  InputProps={{
+                    style: { color: "gray" }, // Ensure input text is gray
+                  }}
                   onChange={(e) => setFormData({ ...formData, vendorName: e.target.value })} />
               </div>
               <div className="col-12 mb-3">
@@ -494,6 +503,7 @@ function ManageActivities({ navigation }) {
             </div>
           </div>
         </div>
+        
         <div className='searchbar-div my-3'>
           <div className="buttonCreate">
             <button className='create' onClick={exportData}>Export</button>
