@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react'
 import "./editactivity.css"
-import {FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 
 
 function SingleActivity() {
     const navigate = useNavigate();
     const [taskObj, setTaskObj] = useState({});
-   
+
     // For Task card management
     const [formObj, setFormObj] = useState({
         title: '',
@@ -33,7 +33,7 @@ function SingleActivity() {
             poDate: "12",
             poNumber: "100",
             poValue: "100",
-            
+
         },
         {
             endDate: "2",
@@ -46,89 +46,89 @@ function SingleActivity() {
             poDate: "12",
             poNumber: "100",
             poValue: "100",
-            
+
         },
     ];
     const [tableData, setTableData] = useState(defaultTableData);
-    
+
     const handleSearchChange = (ev, type) => {
         // setSearchQuery(ev.target.value);
-        if(type === 'store_name'){
+        if (type === 'store_name') {
             let newData = defaultTableData.filter((row) => row.vendorName.toLowerCase() === ev.target.value.toLowerCase());
             setTableData(newData)
         }
-        
+
     };
-    
+
     const [fileName, setFileName] = useState("reference.pptx");
     const [dcFileName, setDcFileName] = useState("dc-invoice.pptx");
-    
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setFileName(file ? file.name : "No file chosen");
     };
 
-        // For Documents
+    // For Documents
     const docIp = useRef(null);
     const [fileNames, setFileNames] = useState(["commercial-documents.pdf"]); // Default file
-             
+
     const handleDocReset = () => {
         if (docIp.current) {
             docIp.current.value = "";
         }
     };
-             
+
     const handleDoc = (event) => {
         const files = event.target.files;
         let names = [];
-      
-         Array.from(files).forEach((file) => {
-           let extension = file.name.split(".").pop().toLowerCase();
-           if (extension === "pdf") {
-             names.push(file.name);
-           } else {
-             alert("Only .pdf files are allowed"); // Replace with SweetAlert if needed
-           }
-         });
-      
-         setFileNames((prevNames) => [...prevNames, ...names]);
+
+        Array.from(files).forEach((file) => {
+            let extension = file.name.split(".").pop().toLowerCase();
+            if (extension === "pdf") {
+                names.push(file.name);
+            } else {
+                alert("Only .pdf files are allowed"); // Replace with SweetAlert if needed
+            }
+        });
+
+        setFileNames((prevNames) => [...prevNames, ...names]);
     };
-   
-    
+
+
     return (
         <div className='employeeContainer'>
             <h5 className='create-employee'>Single Activity</h5>
             <div className="card forms-card">
                 <div className="row mb-3">
                     <div className="col-12 col-lg-6">
-                        <TextField className='w-100' id="outlined-basic" value={formObj.activityName} variant="standard" label="Activity Name" autoComplete="off" required 
+                        <TextField className='w-100' id="outlined-basic" value={formObj.activityName} variant="standard" label="Activity Name" autoComplete="off" required
                             onChange={(ev) => {
-                                setFormObj({...formObj, activityName: ev.target.value})
+                                setFormObj({ ...formObj, activityName: ev.target.value })
                             }}
                         />
                     </div>
                     <div className="col-12 col-lg-6">
-                        <TextField className='w-100' id="outlined-basic" variant="standard" value={formObj.activityNumber} disabled label="Activity Number" autoComplete="off" required 
+                        <TextField className='w-100' id="outlined-basic" variant="standard" value={formObj.activityNumber} disabled label="Activity Number" autoComplete="off" required
                             onChange={(ev) => {
-                                setFormObj({...formObj, activityNumber: ev.target.value})
+                                setFormObj({ ...formObj, activityNumber: ev.target.value })
                             }}
                         />
                     </div>
-                </div>    
-            </div>  
-           
+                </div>
+            </div>
+
             <div className="task-card">
                 <h6 className='items-heading'>Tasks</h6>
                 <div className="row justify-conetnt-center">
                     <div className="col-12 col-lg-6 mb-3">
-                        <TextField 
-                            className='w-100' 
+                        <TextField
+                            className='w-100'
                             // id={`task-number-`} 
-                            variant="standard" 
-                            disabled 
-                            label="Task Number" 
-                            autoComplete="off" 
-                            required 
+                            variant="standard"
+                            disabled
+                            label="Task Number"
+                            autoComplete="off"
+                            required
                             value={taskObj.taskNumber}
                             onChange={(ev) => {
                                 setTaskObj({ ...taskObj, taskNumber: ev.target.value });
@@ -136,14 +136,14 @@ function SingleActivity() {
                         />
                     </div>
                     <div className="col-12 col-lg-6 mb-3">
-                        <TextField className='w-100' id="outlined-basic" variant="standard" value={taskObj.taskName || ''} label="Task Name" autoComplete="off" required 
+                        <TextField className='w-100' id="outlined-basic" variant="standard" value={taskObj.taskName || ''} label="Task Name" autoComplete="off" required
                             onChange={(ev) => {
                                 setTaskObj({ ...taskObj, taskName: ev.target.value });
                             }}
                         />
                     </div>
                     <div className="col-12 col-lg-6 mb-3">
-                        <TextField className='w-100' id="outlined-basic" variant="standard" value={taskObj.taskName || ''} label="Store Code" autoComplete="off" required 
+                        <TextField className='w-100' id="outlined-basic" variant="standard" value={taskObj.taskName || ''} label="Store Code" autoComplete="off" required
                             onChange={(ev) => {
                                 setTaskObj({ ...taskObj, taskName: ev.target.value });
                             }}
@@ -156,7 +156,7 @@ function SingleActivity() {
                                 value={formObj.execution_id}
                                 label="Execution By"
                                 onChange={(ev) => {
-                                    setFormObj({...formObj, execution_id: ev.target.value})
+                                    setFormObj({ ...formObj, execution_id: ev.target.value })
                                 }}
                             >
                                 <MenuItem value={1}>Vendor</MenuItem>
@@ -170,22 +170,22 @@ function SingleActivity() {
                         </h6>
                         <div className="choose-file-input mt-3">
                             <label className="btn choose-file-btn" htmlFor="pptFileInput">
-                            Choose File
+                                Choose File
                             </label>
 
                             <input
-                            id="pptFileInput"
-                            type="file"
-                            style={{ display: "none" }}
-                            onChange={handleFileChange} // Separate handler for PPT
+                                id="pptFileInput"
+                                type="file"
+                                style={{ display: "none" }}
+                                onChange={handleFileChange} // Separate handler for PPT
                             />
 
                             <p
-                            className="mb-0 choose-file-name"
-                            onClick={() => document.getElementById("pptFileInput").click()}
-                            style={{ cursor: "pointer" }}
+                                className="mb-0 choose-file-name"
+                                onClick={() => document.getElementById("pptFileInput").click()}
+                                style={{ cursor: "pointer" }}
                             >
-                            {fileName || "No file chosen"}
+                                {fileName || "No file chosen"}
                             </p>
                         </div>
                     </div>
@@ -194,16 +194,16 @@ function SingleActivity() {
                             <strong>Attachements</strong>
                         </h6>
                         <div className="upload-doc-file">
-                                <div className="d-flex align-items-center">
+                            <div className="d-flex align-items-center">
                                 <label className="btn" id="doc-file" style={{ cursor: "pointer", padding: "0.6rem 1rem" }}>
                                     Choose File
                                     <input
-                                    id="docFileInput"
-                                    type="file"
-                                    accept=".pdf"
-                                    hidden
-                                    multiple
-                                    onChange={handleDoc} // Separate handler for documents
+                                        id="docFileInput"
+                                        type="file"
+                                        accept=".pdf"
+                                        hidden
+                                        multiple
+                                        onChange={handleDoc} // Separate handler for documents
                                     />
                                 </label>
                                 <p
@@ -213,7 +213,7 @@ function SingleActivity() {
                                 >
                                     {fileNames.length === 0 ? "No file chosen" : fileNames.join(", ")}
                                 </p>
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 col-lg-6 mb-3">
@@ -222,65 +222,65 @@ function SingleActivity() {
                         </h6>
                         <div className="choose-file-input mt-3">
                             <label className="btn choose-file-btn" htmlFor="pptFileInput">
-                            Choose File
+                                Choose File
                             </label>
 
                             <input
-                            id="pptFileInput"
-                            type="file"
-                            style={{ display: "none" }}
-                            onChange={handleFileChange} // Separate handler for PPT
+                                id="pptFileInput"
+                                type="file"
+                                style={{ display: "none" }}
+                                onChange={handleFileChange} // Separate handler for PPT
                             />
 
                             <p
-                            className="mb-0 choose-file-name"
-                            onClick={() => document.getElementById("pptFileInput").click()}
-                            style={{ cursor: "pointer" }}
+                                className="mb-0 choose-file-name"
+                                onClick={() => document.getElementById("pptFileInput").click()}
+                                style={{ cursor: "pointer" }}
                             >
-                            {fileName || "No file chosen"}
+                                {fileName || "No file chosen"}
                             </p>
                         </div>
                     </div>
                     <div className="col-12 col-lg-6 mb-3">
-                        <TextField className='w-100' id="outlined-basic" variant="standard" value={taskObj.taskName || ''} label="Docket Number" autoComplete="off" required 
+                        <TextField className='w-100' id="outlined-basic" variant="standard" value={taskObj.taskName || ''} label="Docket Number" autoComplete="off" required
                             onChange={(ev) => {
                                 setTaskObj({ ...taskObj, taskName: ev.target.value });
                             }}
                         />
                     </div>
-                </div> 
-            </div>  
+                </div>
+            </div>
             <div className="card table-card mt-3" style={{ width: "100%" }}>
-                <div className="tableContainer activity-table" style={{ overflowX: "auto", maxWidth: "1200px"}}>
-                    <table className="table" style={{ minWidth: "1300px", tableLayout: "auto"}}>
+                <div className="tableContainer activity-table" style={{ overflowX: "auto", maxWidth: "1200px" }}>
+                    <table className="table" style={{ minWidth: "1300px", tableLayout: "auto" }}>
                         <thead>
                             <tr>
-                                <th>Line No</th>
-                                <th>Store / Branch Code</th>
-                                <th>Store / Branch Name</th>
-                                <th>Element Name </th>
-                                <th>Item code </th>
-                                <th>Item Description</th>
-                                <th>Width (Inches)</th>
-                                <th>Height (Inches)</th>
-                                <th>Quantity</th>
-                                <th>Total SFT</th>
+                                <th className='table-heading'>Line No</th>
+                                <th className='table-heading'>Store / Branch Code</th>
+                                <th className='table-heading'>Store / Branch Name</th>
+                                <th className='table-heading'>Element Name </th>
+                                <th className='table-heading'>Item code </th>
+                                <th className='table-heading'>Item Description</th>
+                                <th className='table-heading'>Width (Inches)</th>
+                                <th className='table-heading'>Height (Inches)</th>
+                                <th className='table-heading'>Quantity</th>
+                                <th className='table-heading'>Total SFT</th>
                             </tr>
-                            <tr>
+                            <tr className='table-heading'>
                                 <th></th>
-                                <th>                    
-                                    <input type="text" placeholder="Search" className='searchInput' onChange={(ev) => {handleSearchChange(ev, 'store_name')}} />
+                                <th className='table-search' >
+                                    <input type="text" placeholder="Search" className='searchInput' onChange={(ev) => { handleSearchChange(ev, 'store_name') }} />
                                 </th>
-                                <th>                    
-                                    <input type="text" placeholder="Search" className='searchInput'  />
+                                <th className='table-search'>
+                                    <input type="text" placeholder="Search" className='searchInput' />
                                 </th>
-                                <th>                    
-                                    <input type="text" placeholder="Search" className='searchInput'  />
+                                <th className='table-search'>
+                                    <input type="text" placeholder="Search" className='searchInput' />
                                 </th>
-                                <th>                    
-                                    <input type="text" placeholder="Search" className='searchInput'  />
+                                <th className='table-search'>
+                                    <input type="text" placeholder="Search" className='searchInput' />
                                 </th>
-                                
+
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -289,38 +289,38 @@ function SingleActivity() {
                             </tr>
                         </thead>
                         <tbody>
-                        {tableData.length > 0 ? (
-                            tableData.map((data, index) => (
-                                <tr key={index}>
-                                    <td>{data.endDate}</td>
-                                    <td>{data.vendorName}</td>
-                                    <td>{data.activityNumber}</td>
-                                    <td>{data.activityName}</td>
-                                    <td>{data.activityDesc}</td>
-                                    <td>{data.tasks}</td>
-                                    <td>{data.tasksCompleted}</td>
-                                    <td>{data.poDate}</td>
-                                    <td>{data.poNumber}</td>
-                                    <td>{data.poValue}</td>
-                                    
+                            {tableData.length > 0 ? (
+                                tableData.map((data, index) => (
+                                    <tr key={index} className='table-row-color'>
+                                        <td>{data.endDate}</td>
+                                        <td>{data.vendorName}</td>
+                                        <td>{data.activityNumber}</td>
+                                        <td>{data.activityName}</td>
+                                        <td>{data.activityDesc}</td>
+                                        <td>{data.tasks}</td>
+                                        <td>{data.tasksCompleted}</td>
+                                        <td>{data.poDate}</td>
+                                        <td>{data.poNumber}</td>
+                                        <td>{data.poValue}</td>
+
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="13" className="text-center">No records found</td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="13" className="text-center">No records found</td>
-                            </tr>
-                        )}
+                            )}
                         </tbody>
                     </table>
                 </div>
             </div>
-                   
-                
+
+
             <div className="text-center mt-3">
-              <button className='btn btn-dark px-4 me-4' onClick={() => {}}>Update</button>
-              <button className='btn btn-danger px-4' onClick={() => {navigate('/app/activity-summary')}}>Cancel</button>
+                <button className='btn btn-dark px-4 me-4' onClick={() => { }}>Update</button>
+                <button className='btn btn-danger px-4' onClick={() => { navigate('/app/activity-summary') }}>Cancel</button>
             </div>
-            </div>
+        </div>
         // </div>
     )
 }

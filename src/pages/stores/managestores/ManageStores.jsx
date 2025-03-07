@@ -174,14 +174,14 @@ function ManageStores({navigation}) {
                     <table className="table">
                         <thead>
                         <tr>
-                            <th scope="col">Store Name</th>
-                            <th scope="col">Store Code</th>
-                            <th scope="col">Actions</th>
+                            <th className='table-heading' scope="col">Store Name</th>
+                            <th className='table-heading' scope="col">Store Code</th>
+                            <th className='table-heading' scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                             {paginatedData && (paginatedData.length > 0) && paginatedData.map((row, index) => (
-                                <tr key={index}>
+                                <tr key={index} className='table-row-color'>
                                     <td>{row.store_name}</td>
                                     <td>{row.store_code}</td>
                                     <td>

@@ -9,6 +9,7 @@ import { Search } from '@mui/icons-material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import * as XLSX from 'xlsx';
 
 const CustomInputLabel = styled(InputLabel)(({ theme }) => ({
   width: '100%',
@@ -199,6 +200,34 @@ function ManageActivities({ navigation }) {
     setTableData(filteredData);
 
     handleCloseFilterModal(); // Close modal after submission
+  };
+
+  const exportData = () => {
+    const workSheet = XLSX.utils.json_to_sheet(tableData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, workSheet, 'Activities');
+    XLSX.writeFile(workbook, 'Activities.xlsx');
+  }
+
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  const handleSelectAll = (event) => {
+    if (event.target.checked) {
+      const allRowIds = tableData.map((data, index) => index);
+      setSelectedRows(allRowIds);
+    } else {
+      setSelectedRows([]);
+    }
+  };
+
+  const handleRowSelect = (index) => {
+    setSelectedRows((prevSelectedRows) => {
+      if (prevSelectedRows.includes(index)) {
+        return prevSelectedRows.filter((rowIndex) => rowIndex !== index);
+      } else {
+        return [...prevSelectedRows, index];
+      }
+    });
   };
 
 
@@ -466,6 +495,9 @@ function ManageActivities({ navigation }) {
           </div>
         </div>
         <div className='searchbar-div my-3'>
+          <div className="buttonCreate">
+            <button className='create' onClick={exportData}>Export</button>
+          </div>
           <div className='searchbar'>
             {/* <div className="buttonCreate" onClick={handleSubmit}>
                         <button className='create'><Search /> Search</button>
@@ -516,11 +548,6 @@ function ManageActivities({ navigation }) {
             </div>
 
           </div>
-          <Link to="/app/edit-activity">
-            <div className="buttonCreate">
-              <button className='create'>+ Edit</button>
-            </div>
-          </Link>
         </div>
         <div className="card table-card mt-3" style={{ width: "100%" }}>
           <div className="tableContainer activity-table" style={{ overflowX: "auto", maxWidth: "calc(100vw - 360px)" }}>
@@ -529,7 +556,12 @@ function ManageActivities({ navigation }) {
                 <tr>
                   <th className='table-heading'>
                     <div className='d-flex align-items-center'>
-                      <input type="checkbox" className='checkboxStyle me-3' />
+                      <input
+                        type="checkbox"
+                        className='checkboxStyle me-3'
+                        checked={selectedRows.length === tableData.length}
+                        onChange={handleSelectAll}
+                      />
                       Date
                     </div>
 
@@ -551,10 +583,18 @@ function ManageActivities({ navigation }) {
               <tbody>
                 {tableData.length > 0 ? (
                   tableData.map((data, index) => (
-                    <tr key={index} className='table-row-color'>
+                    <tr key={index} className='table-row-color' onClick={() => navigate('/app/edit-activity')} >
                       <td>
                         <div className='d-flex align-items-center'>
-                          <input type="checkbox" className='checkboxStyle me-3' />
+                          <input
+                            type="checkbox"
+                            className='checkboxStyle me-3'
+                            checked={selectedRows.includes(index)}
+                            onClick={(e) => e.stopPropagation()} 
+                            onChange={(e) => {
+                              handleRowSelect(index);
+                            }}
+                          />
                           {data.endDate}
                         </div>
                       </td>

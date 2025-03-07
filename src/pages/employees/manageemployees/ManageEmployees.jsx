@@ -159,16 +159,16 @@ function ManageEmployees({navigation}) {
                     <table className="table">
                         <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Employee Number</th>
-                            <th scope="col">Phone No.</th>
-                            <th scope="col">Designation</th>
-                            <th scope="col">Actions</th>
+                            <th className='table-heading' scope="col">Name</th>
+                            <th className='table-heading' scope="col">Employee Number</th>
+                            <th className='table-heading' scope="col">Phone No.</th>
+                            <th className='table-heading' scope="col">Designation</th>
+                            <th className='table-heading' scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                             {paginatedData && (paginatedData.length > 0) && paginatedData.map((row, index) => (
-                                <tr key={index}>
+                                <tr key={index} className='table-row-color'>
                                     <td>{row.name}</td>
                                     <td>{row.employee_number}</td>
                                     <td>{row.phone_number}</td>

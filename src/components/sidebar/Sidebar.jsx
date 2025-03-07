@@ -50,7 +50,7 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
               <p className='actualText'>Manage Vendors</p>
             </div>
           </Link>
-          <Link onClick={() => {closeSideMenu()}} className="sidebar-link">
+          <Link to="/app/profile" onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/profile' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdOutlinePerson className='icon' />
               <p className='actualText'>Profile</p>
@@ -58,7 +58,7 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
           </Link>
         </>}
         {+role === 2 && <>
-          <Link onClick={() => {closeSideMenu()}} className="sidebar-link">
+          <Link  onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/dashboard' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdDashboard className='icon' />
               <p className='actualText'>Dashboard</p>
@@ -112,7 +112,7 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
               <p className='actualText'>Manage Employees</p>
             </div>
           </Link>
-          <Link onClick={() => {closeSideMenu()}} className="sidebar-link">
+          <Link to="/app/profile" onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/profile' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdOutlinePerson className='icon' />
               <p className='actualText'>Profile</p>
@@ -163,14 +163,14 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
               <p className='actualText'>Manage Employees</p>
             </div>
           </Link>
-          <Link onClick={() => {closeSideMenu()}} className="sidebar-link">
+          <Link to="/app/profile" onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/profile' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdOutlinePerson className='icon' />
               <p className='actualText'>Profile</p>
             </div>
           </Link>
         </>}
-        <Link onClick={() => {closeSideMenu()}} className="sidebar-link">
+        <Link to="/app/reset-password" onClick={() => {closeSideMenu()}} className="sidebar-link">
           <div className={pathname === '/app/reset-password' ? 'subContent mb-2 active' : 'subContent mb-2' }>
             <MdLock className='icon' />
             <p className='actualText'>Reset Password</p>

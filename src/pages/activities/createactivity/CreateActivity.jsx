@@ -358,7 +358,7 @@ function CreateActivity() {
                 </div>
                 <h5 className='accordion-heading'>Tasks</h5>
                 {taskCards.map((task, taskIndex) => (
-                    <div key={taskIndex} className="task-card">
+                    <div key={taskIndex} className="task-card remove-box-shadow">
                         <div className="row mb-3">
                             <div className="col-12 col-lg-6">
                                 <div className="row align-items-center">

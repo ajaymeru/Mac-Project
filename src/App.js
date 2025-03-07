@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/login/Login";
 // import ChangePassword from "./pages/ChangePassword/ChangePassword";
 // import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-// import ResetPassword from "./pages/resetpassword/ResetPassword";
+import ResetPassword from "./pages/resetpassword/ResetPassword";
 import Layout from "./pages/layout/Layout";
 import CreateAccount from "./pages/admin/accounts/CreateAccount/CreateAccount";
 import EditAccount from "./pages/admin/accounts/EditAccount/EditAccount";
@@ -34,7 +34,7 @@ import SingleActivity from "./pages/activities/editactivity/SingleActivity";
 // import CreateLocation from "./pages/createlocation/CreateLocation";
 // import Editlocation from "./pages/editlocation/Editlocation";
 // import ManageLocations from "./pages/managelocations/ManageLocations";
-// import Profile from "./pages/profile/Profile";
+import Profile from "./pages/profile/Profile";
 
 function App() {
 
@@ -64,8 +64,8 @@ function App() {
               <Route path="/app/manage-approvedtasks" element={<ManageApprovedTasks />} />
               <Route path="/app/view-task" element={<ViewTask />} />
               <Route path="/app/view-employee-task" element={<ViewEmployeeTask />} />
-              {/* <Route path="/app/profile" element={<Profile />} />
-              <Route path="/app/reset-password" element={<ResetPassword />} /> */}
+              <Route path="/app/profile" element={<Profile />} />
+              <Route path="/app/reset-password" element={<ResetPassword />} />
             </Route>
             <Route path="/admin" element={<Layout />}>
               <Route index path="/admin/create-client" element={<CreateAccount />} />

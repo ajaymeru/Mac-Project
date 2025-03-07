@@ -31,7 +31,7 @@ const ColoredCheckbox = styled(Checkbox)(({ theme }) => ({
     borderColor: '#000',
   },
 }));
-const storeItems = ['Store 1', 'Store 2', 'Store 3', 'Store 4', 'Store 5'];
+const storeItems = ['Store 1', 'Store 2', 'Store 3'];
 function EditActivity() {
   const navigate = useNavigate('');
 
@@ -51,6 +51,7 @@ function EditActivity() {
   const [scrollAssign, setScrollAssign] = React.useState('paper');
   const descriptionAssignElementRef = React.useRef(null);
 
+
   const handleCloseAssign = () => {
     setOpenAssign(false);
   };
@@ -68,7 +69,7 @@ function EditActivity() {
     toDate: new Date().toISOString().split('T')[0],
     vendor_id: 1,
     execution_id: 2,
-    stores: ['Store1', 'Store2'],
+    stores: ['Store 1', 'Store 2'],
   });
 
   // State to track all tasks
@@ -220,7 +221,7 @@ function EditActivity() {
   // State to track which task cards are open
   const [accordions, setAccordions] = useState([{}]);
   const [isAccordionOpen, setIsAccordionOpen] = useState(true);
-  const [taskCards, setTaskCards] = useState([true]);
+  const [taskCards, setTaskCards] = useState(tasks);
 
   // Current task being edited
   const [taskObj, setTaskObj] = useState({});
@@ -261,33 +262,41 @@ function EditActivity() {
     setIsAccordionOpen(true);
   };
 
- 
-
-const addItem = (taskIndex) => {
-  const updatedTasks = [...taskCards];
-  if (updatedTasks[taskIndex] && updatedTasks[taskIndex].items) {
-    updatedTasks[taskIndex].items.push({
-      title: '',
-      itemCode: '',
-      description: '',
-      width: '',
-      height: '',
-      quantity: '',
-      total_sft: '',
-      rate: '',
-      tax: '',
-      amount: '',
-    });
-    setTaskCards(updatedTasks);
-  } else {
-    console.error(`Task at index ${taskIndex} is undefined or has no items array`);
-  }
-};
-  // Delete an item from the current task
-  const deleteItem = (ind) => {
-    let newItems = items.filter((item, index) => index !== ind);
-    setItems(newItems);
+  const addItem = (taskIndex) => {
+    const updatedTasks = [...taskCards];
+    if (updatedTasks[taskIndex] && updatedTasks[taskIndex].items) {
+      updatedTasks[taskIndex].items.push({
+        title: '',
+        itemCode: '',
+        description: '',
+        width: '',
+        height: '',
+        quantity: '',
+        total_sft: '',
+        rate: '',
+        tax: '',
+        amount: '',
+      });
+      setTaskCards(updatedTasks);
+      setHasChanges(true);
+    } else {
+      console.error(`Task at index ${taskIndex} is undefined or has no items array`);
+    }
   };
+  // Delete an item from the current task
+  const deleteItem = (taskIndex, itemIndex) => {
+    const updatedTasks = [...taskCards];
+    if (updatedTasks[taskIndex] && updatedTasks[taskIndex].items) {
+      updatedTasks[taskIndex].items = updatedTasks[taskIndex].items.filter((item, index) => index !== itemIndex);
+      setTaskCards(updatedTasks);
+      setHasChanges(true);
+    } else {
+      console.error(`Task at index ${taskIndex} is undefined or has no items array`);
+    }
+  };
+
+  // show save and clear btns when made changes 
+  const [hasChanges, setHasChanges] = useState(false);
 
   const handleAddTask = () => {
     setTaskCards([
@@ -443,7 +452,7 @@ const addItem = (taskIndex) => {
               <div className="col-12 col-lg-4">
                 <label className="form-label">Activity Number</label>
               </div>
-              <div className="col-12 col-lg-8">
+              <div className="col-12 col-lg-8 ">
                 <input
                   type="text"
                   className="form-control"
@@ -708,7 +717,7 @@ const addItem = (taskIndex) => {
                             type="checkbox"
                             className="form-check-input"
                             checked={formObj.stores.includes(item)}
-                            onChange={() => {}} // Empty onChange to avoid React warning
+                            onChange={() => handleSelectChange(item)}
                             id={`store-${item}`}
                           />
                           <label
@@ -913,7 +922,7 @@ const addItem = (taskIndex) => {
         {/* Same Layout as Create */}
 
         {/* <div className="d-flex w-100 justify-content-between"> */}
-          {/* <div className="d-flex" style={{ gap: 10, flex: 1 }}>
+        {/* <div className="d-flex" style={{ gap: 10, flex: 1 }}>
             <input
               type="checkbox"
               style={{ position: 'relative', zIndex: 20 }}
@@ -928,281 +937,281 @@ const addItem = (taskIndex) => {
               // }}
             />
           </div> */}
-          {/* {tasks.map((taskObj, index) => ( */}
-            <div className="task-card">
-              <>
-                <div className="card table-card mt-3" style={{ width: '100%' }}>
-                  <div
-                    className="tableContainer items-table"
-                    style={{
-                      overflowX: 'auto',
-                      maxWidth: 'calc(100vw - 360px)',
-                    }}
-                  >
-                    <table
-                      className="table"
-                      style={{
-                        minWidth: '100vw',
-                        tableLayout: 'auto',
-                        paddingInline: '1em',
-                      }}
-                    >
-                      <thead className="table-head-color">
-                        <tr>
-                          <th className="table-heading">Task Number</th>
-                          <th className="table-heading">Task Name</th>
-                          <th className="table-heading">Element Name</th>
-                          <th className="table-heading">Item Code</th>
-                          <th className="table-heading">Item Description</th>
-                          <th className="table-heading">Width</th>
-                          <th className="table-heading">Height</th>
-                          <th className="table-heading">Quantity</th>
-                          <th className="table-heading">Total Sft</th>
-                          <th className="table-heading">Rate</th>
-                          <th className="table-heading">Tax</th>
-                          <th className="table-heading">Amount</th>
-                          <th className="table-heading">Actions</th>
-                        </tr>
-                      </thead>
+        {/* {tasks.map((taskObj, index) => ( */}
+        <div className="task-card remove-box-shadow">
+          {/* <> */}
+            <div className="card table-card mt-3" style={{ width: '100%' }}>
+              <div
+                className="tableContainer items-table"
+                style={{
+                  overflowX: 'auto',
+                  maxWidth: 'calc(100vw - 360px)',
+                }}
+              >
+                <table
+                  className="table"
+                  style={{
+                    minWidth: '100vw',
+                    tableLayout: 'auto',
+                    paddingInline: '1em',
+                  }}
+                >
+                  <thead className="table-head-color">
+                    <tr>
+                      <th className="table-heading">Task Number</th>
+                      <th className="table-heading">Task Name</th>
+                      <th className="table-heading">Element Name</th>
+                      <th className="table-heading">Item Code</th>
+                      <th className="table-heading">Item Description</th>
+                      <th className="table-heading">Width</th>
+                      <th className="table-heading">Height</th>
+                      <th className="table-heading">Quantity</th>
+                      <th className="table-heading">Total Sft</th>
+                      <th className="table-heading">Rate</th>
+                      <th className="table-heading">Tax</th>
+                      <th className="table-heading">Amount</th>
+                      <th className="table-heading">Actions</th>
+                    </tr>
+                  </thead>
 
-                      <tbody>
-                        {allItems.length > 0 ? (
-                          allItems.map((item, index) => (
-                            <tr key={index} className="table-row-color">
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.taskNumber}
-                                  onChange={(e) =>
-                                    handleTaskChange(
-                                      item.taskIndex,
-                                      'taskNumber',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.taskName}
-                                  onChange={(e) =>
-                                    handleTaskChange(
-                                      item.taskIndex,
-                                      'taskName',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.title || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'title',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.itemCode || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'itemCode',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.description || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'description',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.width || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'width',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.height || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'height',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.quantity || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'quantity',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.total_sft || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'total_sft',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.rate || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'rate',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.tax || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'tax',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  className="table-data-form-control"
-                                  value={item.amount || ''}
-                                  onChange={(e) =>
-                                    handleItemChange(
-                                      item.taskIndex,
-                                      item.itemIndex,
-                                      'amount',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </td>
-                              <td className="d-flex align-items-center">
-                                <button
-                                  className="btn btn-delete me-2"
-                                  onClick={() =>
-                                    deleteItem(item.taskIndex, item.itemIndex)
-                                  }
-                                >
-                                  <MdDelete />
-                                </button>
-                                <button
-                                  className="btn btn-add"
-                                  onClick={() => addItem(item.taskIndex)}
-                                >
-                                  <MdAdd />
-                                </button>
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="13" className="text-center">
-                              No records found
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="text-center mt-3">
-                  <button
-                    className="btn btn-dark px-4 me-4"
-                    onClick={handleSave}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className="btn btn-danger px-4"
-                    onClick={handleClear}
-                  >
-                    Clear
-                  </button>
-                </div>
-              </>
+                  <tbody>
+                    {allItems.length > 0 ? (
+                      allItems.map((item, index) => (
+                        <tr key={index} className="table-row-color">
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.taskNumber}
+                              onChange={(e) =>
+                                handleTaskChange(
+                                  item.taskIndex,
+                                  'taskNumber',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.taskName}
+                              onChange={(e) =>
+                                handleTaskChange(
+                                  item.taskIndex,
+                                  'taskName',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.title || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'title',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.itemCode || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'itemCode',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.description || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'description',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.width || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'width',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.height || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'height',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.quantity || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'quantity',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.total_sft || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'total_sft',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.rate || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'rate',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.tax || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'tax',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              className="table-data-form-control"
+                              value={item.amount || ''}
+                              onChange={(e) =>
+                                handleItemChange(
+                                  item.taskIndex,
+                                  item.itemIndex,
+                                  'amount',
+                                  e.target.value,
+                                )
+                              }
+                            />
+                          </td>
+                          <td className="d-flex align-items-center">
+                            <button
+                              className="btn btn-delete me-2"
+                              onClick={() => deleteItem(item.taskIndex, item.itemIndex)}
+                            >
+                              <MdDelete />
+                            </button>
+                            <button
+                              className="btn btn-add"
+                              onClick={() => addItem(item.taskIndex)}
+                            >
+                              <MdAdd />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="13" className="text-center">
+                          No records found
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          {/* ))} */}
+            {hasChanges && (
+            <div className="text-center mt-3">
+              <button
+                className="btn btn-dark px-4 me-4"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+              <button
+                className="btn btn-danger px-4"
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+            </div>
+          )}
+          {/* </> */}
+        </div>
+        {/* ))} */}
         {/* </div> */}
 
         {showAddTask && (
-                <div className="text-end mt-3 cursor-pointer" onClick={handleAddTask}>
-                    + Add Task
-                </div>
-                )} 
+          <button className="text-end mt-3 cursor-pointer" onClick={handleAddTask}>
+            + Add Task
+          </button>
+        )}
       </div>
       <div className="text-center mt-4">
-        <button className="btn btn-dark px-4 me-4" onClick={() => {}}>
+        <button className="btn btn-dark px-4 me-4" onClick={() => { }}>
           Update
         </button>
         <button
