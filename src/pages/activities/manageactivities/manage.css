@@ -1,0 +1,80 @@
+.manageContainer{
+    padding: 30px;
+    height: calc(100vh - 80px);
+    width: calc(100vw - 300px);
+    background-color: #fff !important;
+    overflow: auto;
+}
+.manage-employee{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.searchbar-div{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+.searchbar{
+    justify-content: flex-start;
+}
+.buttonCreate{
+    justify-content: flex-end;
+}
+.create{
+    background-color: black;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.table-card{
+    border-radius: 5px;
+    padding: 0px;
+}
+.activity-table td{
+    min-width: 50%;
+    font-size: .85em;
+    padding: 1em 1em !important;
+    font-weight: 500;
+    cursor: pointer;
+}
+table {
+    --bs-table-bg: transparent !important;
+}
+.status-table-padding{
+    padding: 12px 14px;
+}
+/* Apply your hover effect */
+.table-row-color:hover {
+    background-color: #ecebf0 !important;
+}
+
+.no-employee-data{
+    border: none;
+    padding-top: 20px;
+}
+thead tr th{
+    text-wrap: nowrap;
+}
+.table-heading{
+    background-color: #ecebf0 !important;
+    color: #000 !important;
+    font-weight: bold; 
+    text-transform: uppercase; 
+    font-size: .82em;
+    align-items: center;
+    padding: 1em 1em !important;
+}
+.checkboxStyle{
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    margin-left: 1em;
+}
+tbody td{
+    text-wrap: nowrap;
+}
+@media screen and (max-width: 992px) {
+    .manageContainer{
+        padding: 20px 15px;
+    }
+}

@@ -1,0 +1,11 @@
+.resetContainer{
+  padding: 30px;
+  background: #e2e1e2;
+  height: calc(100vh - 80px);
+  overflow: auto;
+}
+@media screen and (max-width: 992px) {
+  .resetContainer{
+      padding: 20px 15px;
+  }
+}

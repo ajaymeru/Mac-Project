@@ -1,0 +1,16 @@
+.managelocation-container{
+    padding: 30px;
+    height: calc(100vh - 80px);
+    width: calc(100vw - 300px);
+    background-color: #e2e1e2;
+    overflow: auto;
+}
+.manage-location{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+@media screen and (max-width: 992px) {
+    .managelocation-container{
+        padding: 20px 15px;
+    }
+}

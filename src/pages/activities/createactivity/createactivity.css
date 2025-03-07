@@ -1,0 +1,95 @@
+.task-dialog .MuiPaper-root.MuiDialog-paper{
+  max-width: 80vw;
+}
+.item-dialog .MuiPaper-root.MuiDialog-paper{
+  max-width: 80vw;
+}
+.task-card{
+  background-color: #fff;
+  box-shadow: 0 0 2px 2px #e2e1e2;
+  border-radius: 5px;
+  padding: 1em;
+  margin-top: 1em;
+}
+.items-heading{
+  font-size: 1.2em;
+  margin-bottom: .5em;
+}
+.accordion-heading{
+  font-size: 1.2em;
+  margin-bottom: .5em;
+  text-transform: capitalize;
+}
+
+/* Input labels */
+.input-label{
+  display: flex;
+  align-items: center;
+}
+.card.forms-card{
+  padding: 20px !important;
+  margin-top: 20px !important;
+}
+.form-label{
+  flex: 1;
+  font-size: 1em;
+  font-weight: 400;
+}
+.form-control{
+  flex: 1;
+  font-size: 1em;
+  font-weight: 400;
+}
+.form-select{
+  text-transform: capitalize;
+  text-align: start;
+}
+.form-control:hover,
+.form-control:focus,
+.form-select:hover,
+.form-select:focus{
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #000;
+}
+.table-head-color{
+  background-color: #ecebf0 !important;
+}
+.btn.btn-delete{
+  padding: .3em .5em;
+  background-color: #DC3545;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn.btn-add{
+  background-color: #000;
+  color: #fff;
+  padding: .3em .5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.items-table td{
+  font-size: .85em;
+  padding: .5em 1em !important;
+  font-weight: 500;
+  cursor: pointer;
+  vertical-align: middle;
+  /* color: #000; */
+}
+.table-data-form-control{
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #e2e1e2;
+  background-color: transparent;
+}
+.table-data-form-control:hover,
+.table-data-form-control:focus{
+  border: none;
+  border-bottom: 1px solid #e2e1e2;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+}

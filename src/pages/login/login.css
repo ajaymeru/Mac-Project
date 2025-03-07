@@ -1,0 +1,122 @@
+.loginContainer{
+    display: flex;
+}
+.loginLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+.login-page .loginRight{
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 0 25%;
+/* color: white; */
+}
+.headingText{
+    font-size: 1.5rem;
+}
+.login-page .image{
+    max-height: 50vh;
+    max-width: 80%;
+    margin: 10px 0 15px;
+}
+.login-page p:last-child{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.login-page p{
+    font-size: 1.2rem;
+    /* font-weight: 500; */
+}
+.login-page p a{
+    font-weight: 700;
+}
+.loginText{
+    font-size: 1.5rem;
+    justify-content: flex-start;
+    margin: 0;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+.submitButton{
+    color: white;
+    background-color: black;
+    border-radius: 50px;
+    padding: 5px 25px;
+    border: 1px solid #ffe600;
+}
+.submitButton:hover{
+    color: black;
+    border: 1px solid #000;
+    background-color: white;
+}
+.forgot{
+    font-size: 1.1rem;
+}
+
+.login-page .btn-white,
+.login-page .btn-white:focus{
+    background: #fff;
+    outline: none;
+    border: none;
+}
+.login-page .btn-white:hover{
+    background: #ffffff95;
+    outline: none;
+    border: none;
+}
+
+.login-page .btn.btn-light,
+.login-page .btn.btn-light:focus{
+    background: transparent;
+    color: white;
+    outline: none;
+    border: none;
+}
+
+.login-page .btn.btn-light:hover{
+    background: #ffffff30;
+    outline: none;
+    border: none;
+}
+
+.MuiFormControl-root.MuiTextField-root.cust-white-input-field{
+    width: 100%;
+}
+@media screen and (min-width:992px){
+    .cust-white-input-field{
+        width: 50%;
+    }
+}
+.cust-white-input-field .MuiFormLabel-root.MuiInputLabel-root{
+    color: #fff;
+}
+.cust-white-input-field .MuiInputBase-input.MuiOutlinedInput-input{
+    color: #fff;
+}
+.cust-white-input-field .MuiOutlinedInput-notchedOutline{
+    border-color: #fff;
+}
+.cust-white-input-field .MuiInputBase-root.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+    border-color: #fff;
+}
+.cust-white-input-field .MuiInputBase-root.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{
+    border-color: #fff;
+}
+
+@media screen and (max-width:991px) {
+      .login-page .loginRight{
+        padding: 0 8%;
+      }
+      .login-page .btn.btn-light{
+        padding-top: 2px;
+      }
+  }

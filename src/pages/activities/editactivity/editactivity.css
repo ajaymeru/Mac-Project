@@ -1,0 +1,22 @@
+.task-dialog .MuiPaper-root.MuiDialog-paper{
+  max-width: 80vw;
+}
+.item-dialog .MuiPaper-root.MuiDialog-paper{
+  max-width: 80vw;
+}
+.task-card{
+  background-color: #fff;
+  box-shadow: 0 0 2px 2px #e2e1e2;
+  border-radius: 5px;
+  padding: 1em;
+  margin-top: 1em;
+}
+.items-heading{
+  font-size: 1.2em;
+  margin-bottom: .5em;
+}
+.accordion-heading{
+  font-size: 1.2em;
+  margin-bottom: .5em;
+  text-transform: capitalize;
+}

@@ -1,0 +1,51 @@
+.manageContainer{
+    padding: 30px;
+    height: calc(100vh - 80px);
+    width: calc(100vw - 300px);
+    background-color: #e2e1e2;
+    overflow: auto;
+}
+.manage-employee{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.searchbar-div{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+.searchbar{
+    justify-content: flex-start;
+}
+.buttonCreate{
+    justify-content: flex-end;
+}
+.create{
+    background-color: black;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.table-card{
+    border-radius: 5px;
+    padding: 0px;
+}
+.emp-table th,
+.emp-table td{
+    min-width: 20%;
+}
+.no-employee-data{
+    border: none;
+    padding-top: 20px;
+}
+p.MuiTablePagination-selectLabel{
+    margin-bottom: 0;
+}
+p.MuiTablePagination-displayedRows{
+    margin-bottom: 0;
+}
+@media screen and (max-width: 992px) {
+    .manageContainer{
+        padding: 20px 15px;
+    }
+}

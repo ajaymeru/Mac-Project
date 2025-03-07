@@ -1,0 +1,21 @@
+.accordionBody{
+    justify-content: space-between;
+    display: flex;
+}
+.accordionImage{
+    justify-content: flex-start;
+}
+.accordionText{
+    justify-content: flex-end;
+}
+.accordion-flush .accordion-item:last-child {
+    border-bottom: 1px solid gainsboro;
+}
+.accordion-flush .accordion-item:first-child {
+    border-top: 1px solid gainsboro;
+}
+.accordion-flush .accordion-item {
+    border-right: 1px solid gainsboro;
+    border-left: 1px solid gainsboro;
+    border-radius: 0;
+}

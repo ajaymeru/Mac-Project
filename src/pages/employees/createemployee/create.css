@@ -1,0 +1,55 @@
+.employeeContainer{
+    padding: 30px;
+    height: calc(100vh - 80px);
+    width: calc(100vw - 300px);
+    background-color: #e2e1e2;
+    overflow: auto;
+}
+.create-employee{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.forms-card{
+    box-shadow: 0 0 2px 2px #e2e1e2;
+    padding: 30px;
+    margin-top: 30px;
+}
+.buttonsRow{
+    display: flex;
+    justify-content: center;
+}
+.createButton{
+    background-color: black;
+    border-radius: 50px;
+    padding: 5px 25px;
+    width: fit-content;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+.createButton:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+.cancelButton{
+    background-color: orangered;
+    border: none;
+    border-radius: 50px;
+    padding: 5px 25px;
+    width: fit-content;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+.cancelButton:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 992px) {
+    .employeeContainer{
+        padding: 20px 15px;
+    }
+}
