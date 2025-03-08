@@ -2,11 +2,11 @@
     padding: 30px;
     height: calc(100vh - 80px);
     width: calc(100vw - 300px);
-    background-color: #e2e1e2;
+    background-color: #fbfbfb;
     overflow: auto;
 }
 .create-employee{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 .forms-card{

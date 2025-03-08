@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *,::after,::before{
   padding: 0;
   margin: 0;
@@ -10,9 +12,10 @@
 body {
   margin: 0;
   background-color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+    font-family: 'Poppins' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -62,6 +65,7 @@ code {
 
 button, button.btn{
   text-transform: uppercase;
+  font-size: .80em;
 }
 .activities-filter{
   font-size: 1.3em;
@@ -121,6 +125,7 @@ button, button.btn{
   border-right: 1px solid #ccc;
   border-radius: 0;
   padding: 0.6rem 1rem;
+  font-size: .82em;
 }
 
 .btn.choose-file-btn:hover,
@@ -146,8 +151,14 @@ button, button.btn{
   border-radius: 4px;
   padding: 0.6rem; */
 
+  font-size: .82em;
+
   border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.upload-doc-file label, input{
+  font-size: .82em;
 }
 
 #doc-file{
@@ -156,4 +167,8 @@ button, button.btn{
   box-shadow: none;
   border-right: 1px solid #ccc;
   border-radius: 0;
+}
+
+.text-black, label, p{
+  font-size: .82em;
 }

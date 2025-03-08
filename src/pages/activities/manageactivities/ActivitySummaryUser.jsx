@@ -1,112 +1,114 @@
-    import React, { useState } from 'react'
-    import "./ActivitySummaryClientCopy.css"
-    import { IoSearch } from "react-icons/io5";
-    import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-    import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-    import dayjs from 'dayjs';
-    import * as XLSX from 'xlsx';
-    import { TextField, MenuItem } from '@mui/material'; // Import MenuItem for dropdown
-    import { useNavigate } from 'react-router-dom';
-    import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react'
+import "./ActivitySummaryClientCopy.css"
+import { IoSearch } from "react-icons/io5";
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import * as XLSX from 'xlsx';
+import { TextField, MenuItem } from '@mui/material'; // Import MenuItem for dropdown
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-    const ActivitySummaryClientCopy = () => {
-        const navigate = useNavigate();
+const ActivitySummaryClientCopy = () => {
+    const navigate = useNavigate();
 
-        const statusActivities = [
-            // { "status": "New", "count": 10 },
-            // { "status": "Assigned", "count": 20 },
-            // { "status": "Accepted", "count": 10 },
-            // { "status": "Rejected", "count": 20 },
-            { "status": "Inprogress", "count": 10 },
-            // { "status": "Dispatched", "count": 20 },
-            { "status": "Completed", "count": 20 }
-        ]
+    const statusActivities = [
+        // { "status": "New", "count": 10 },
+        // { "status": "Assigned", "count": 20 },
+        // { "status": "Accepted", "count": 10 },
+        // { "status": "Rejected", "count": 20 },
+        { "status": "Inprogress", "count": 10 },
+        // { "status": "Dispatched", "count": 20 },
+        { "status": "Completed", "count": 20 }
+    ]
 
-        const searchfields = [
-            { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
-            { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
-            { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
-            { "field": "Start Date", "type": "date", "placeholder": "Enter Start Date" },
-            { "field": "End Date", "type": "date", "placeholder": "Enter End Date" },
-        ]
+    const searchfields = [
+        { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
+        { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
+        { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
+        // { "field": "Start Date", "type": "date", "placeholder": "Enter Start Date" },
+        // { "field": "End Date", "type": "date", "placeholder": "Enter End Date" },
+    ]
 
-        const [startDate, setStartDate] = useState(null);
-        const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
 
-        const exportData = () => {
-            const workSheet = XLSX.utils.json_to_sheet(tableData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, workSheet, 'Activities');
-            XLSX.writeFile(workbook, 'Activities.xlsx');
+    const exportData = () => {
+        const workSheet = XLSX.utils.json_to_sheet(tableData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, workSheet, 'Activities');
+        XLSX.writeFile(workbook, 'Activities.xlsx');
+    }
+
+    const defaultTableData = [
+        {
+            endDate: "2024-02-18",
+            ExecutionBy: "Vendor",
+            vendorName: "Default Vendor",
+            ExecutionCaptain: "",
+            activityNumber: "1234",
+            ActivityCode: "ACT-1234",
+            activityName: "Default Activity",
+            ActivitiyPeriod: "2024-02-10 to 2024-02-20",
+            // activityDesc: "Description here",
+            // tasks: 10,
+            // tasksCompleted: 5,
+            // poDate: "2024-02-10",
+            // poNumber: "PO-5678",
+            // poValue: "$1000",
+            selectedStatus: "Pending",
+            // store: "Confirmed",
+            remarks: "Default remarks",
+            Action: "complete"
+        },
+        {
+            endDate: "2024-02-20",
+            ExecutionBy: "Store Team",
+            vendorName: "Vendor",
+            ExecutionCaptain: "",
+            activityNumber: "123456",
+            ActivityCode: "ACT-1234",
+            activityName: "Activity",
+            ActivitiyPeriod: "2024-02-10 to 2024-02-20",
+            activityDesc: "Lorem Ipusm",
+            tasks: 20,
+            tasksCompleted: 10,
+            poDate: "2024-02-30",
+            poNumber: "PO-1234",
+            poValue: "$3000", // Changed from povalue to poValue for consistency
+            selectedStatus: "In-Progress",
+            store: "Pending",
+            remarks: "Lorem",
+            Action: "pending"
         }
+    ];
 
-        const defaultTableData = [
-            {
-                endDate: "2024-02-18",
-                ExecutionBy: "Vendor",
-                vendorName: "Default Vendor",
-                ExecutionCaptain: "",
-                activityNumber: "1234",
-                ActivityCode : "ACT-1234",
-                activityName: "Default Activity",
-                ActivitiyPeriod : "2024-02-10 to 2024-02-20",
-                // activityDesc: "Description here",
-                // tasks: 10,
-                // tasksCompleted: 5,
-                // poDate: "2024-02-10",
-                // poNumber: "PO-5678",
-                // poValue: "$1000",
-                selectedStatus: "Pending",
-                // store: "Confirmed",
-                remarks: "Default remarks",
-                Action:"complete"
-            },
-            {
-                endDate: "2024-02-20",
-                ExecutionBy: "Store Team",
-                vendorName: "Vendor",
-                ExecutionCaptain: "",
-                activityNumber: "123456",
-                ActivityCode : "ACT-1234",
-                activityName: "Activity",
-                ActivitiyPeriod : "2024-02-10 to 2024-02-20",
-                activityDesc: "Lorem Ipusm",
-                tasks: 20,
-                tasksCompleted: 10,
-                poDate: "2024-02-30",
-                poNumber: "PO-1234",
-                poValue: "$3000", // Changed from povalue to poValue for consistency
-                selectedStatus: "In-Progress",
-                store: "Pending",
-                remarks: "Lorem",
-                Action:"pending"
-            }
-        ];
+    const [tableData, setTableData] = useState(defaultTableData);
 
-        const [tableData, setTableData] = useState(defaultTableData);
+    const [selectedRows, setSelectedRows] = useState([]);
 
-        const [selectedRows, setSelectedRows] = useState([]);
+    const handleSelectAll = (event) => {
+        if (event.target.checked) {
+            const allRowIds = tableData.map((data, index) => index);
+            setSelectedRows(allRowIds);
+        } else {
+            setSelectedRows([]);
+        }
+    };
 
-        const handleSelectAll = (event) => {
-            if (event.target.checked) {
-                const allRowIds = tableData.map((data, index) => index);
-                setSelectedRows(allRowIds);
+    const handleRowSelect = (index) => {
+        setSelectedRows((prevSelectedRows) => {
+            if (prevSelectedRows.includes(index)) {
+                return prevSelectedRows.filter((rowIndex) => rowIndex !== index);
             } else {
-                setSelectedRows([]);
+                return [...prevSelectedRows, index];
             }
-        };
+        });
+    };
 
-        const handleRowSelect = (index) => {
-            setSelectedRows((prevSelectedRows) => {
-                if (prevSelectedRows.includes(index)) {
-                    return prevSelectedRows.filter((rowIndex) => rowIndex !== index);
-                } else {
-                    return [...prevSelectedRows, index];
-                }
-            });
-        };
-
-        return (
+    return (
+        <div className="padding">
+            <h5 className='create-employee mb-3'>Activity Summary user</h5>
             <div className='ActivitySummaryClient'>
                 <div className="filters-data container d-flex flex-column p-3">
                     <div className="row mb-1">
@@ -299,7 +301,8 @@
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
-    export default ActivitySummaryClientCopy
+export default ActivitySummaryClientCopy

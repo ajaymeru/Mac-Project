@@ -97,184 +97,186 @@ const ActivitySummaryClientCopy = () => {
     };
 
     return (
-        <div className='ActivitySummaryClient'>
-            <div className="filters-data container d-flex flex-column p-3">
-                <div className="row mb-1">
-                    <div className="col-12">
-                        <h4>Search <IoSearch /> </h4>
-                        <div className="row">
-                            {searchfields.map((field, index) => (
-                                <div key={index} className="col-md-2 mb-1">
-                                    <label className="form-label pl-3">{field.field}</label>
-                                    {field.type === "dropdown" ? (
-                                        <TextField
-                                            select
-                                            className="form-control"
-                                            placeholder={field.placeholder}
-                                            variant="standard"
-                                            InputProps={{
-                                                style: {
-                                                    border: '1px solid #ced4da',
-                                                    borderRadius: '4px',
-                                                }
-                                            }}
-                                        >
-                                            {field.options.map((option, idx) => (
-                                                <MenuItem key={idx} value={option}>
-                                                    {option}
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    ) : (
-                                        <input type={field.type} className="form-control" placeholder={field.placeholder} />
-                                    )}
+        <div className="padding">
+            <div className='ActivitySummaryClient'>
+                <div className="filters-data container d-flex flex-column p-3">
+                    <div className="row mb-1">
+                        <div className="col-12">
+                            <h4>Search <IoSearch /> </h4>
+                            <div className="row">
+                                {searchfields.map((field, index) => (
+                                    <div key={index} className="col-md-2 mb-1">
+                                        <label className="form-label pl-3">{field.field}</label>
+                                        {field.type === "dropdown" ? (
+                                            <TextField
+                                                select
+                                                className="form-control"
+                                                placeholder={field.placeholder}
+                                                variant="standard"
+                                                InputProps={{
+                                                    style: {
+                                                        border: '1px solid #ced4da',
+                                                        borderRadius: '4px',
+                                                    }
+                                                }}
+                                            >
+                                                {field.options.map((option, idx) => (
+                                                    <MenuItem key={idx} value={option}>
+                                                        {option}
+                                                    </MenuItem>
+                                                ))}
+                                            </TextField>
+                                        ) : (
+                                            <input type={field.type} className="form-control" placeholder={field.placeholder} />
+                                        )}
+                                    </div>
+                                ))}
+                                <div className="col-md-2 mb-1 d-flex align-items-end">
+                                    <button className="btn btn-primary w-100">Submit</button>
                                 </div>
-                            ))}
-                            <div className="col-md-2 mb-1 d-flex align-items-end">
-                                <button className="btn btn-primary w-100">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <h4>Summary</h4>
+                            <div className="status-grid d-flex justify-content-between">
+                                {statusActivities.map((status, index) => (
+                                    <div key={index} className="custom-col mb-2 col-md-2">
+                                        <div className="card">
+                                            <div className="card-body d-flex justify-content-between status-card-body">
+                                                <div>{status.status}</div>
+                                                <div>{status.count}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-12">
-                        <h4>Summary</h4>
-                        <div className="row">
-                            {statusActivities.map((status, index) => (
-                                <div key={index} className="col-md-3 mb-2">
-                                    <div className="card">
-                                        <div className="card-body d-flex justify-content-between status-card-body">
-                                            <div>{status.status}</div>
-                                            <div>{status.count}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+
+                <div className="table-container px-3">
+                    <div className="searchbar-div my-3">
+                        <div className="buttonCreate">
+                            <button className='create' onClick={exportData}>Export</button>
+                        </div>
+                        <div className="d-flex align-items-center">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    variant="standard"
+                                    label="Start Date"
+                                    className="cust-violet-input-field date-field w-100 me-3"
+                                    value={startDate ? dayjs(startDate, "DD-MM-YYYY") : null}
+                                    format="DD-MM-YYYY"
+                                    onChange={(newValue) => {
+                                        if (!newValue) return;
+                                        setStartDate(newValue.format("DD-MM-YYYY"));
+                                    }}
+                                    slots={{ textField: TextField }}
+                                    // Use slots for TextField
+                                    slotProps={{
+                                        textField: {
+                                            variant: "standard",
+                                            className: "cust-violet-input-field date-field w-100 me-3"
+                                        }
+                                    }}
+                                />
+                            </LocalizationProvider>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    variant="standard"
+                                    label="End Date"
+                                    className="cust-violet-input-field date-field w-100 me-3"
+                                    value={endDate ? dayjs(endDate, "DD-MM-YYYY") : null}
+                                    format="DD-MM-YYYY"
+                                    onChange={(newValue) => {
+                                        if (!newValue) return;
+                                        setEndDate(newValue.format("DD-MM-YYYY"));
+                                    }}
+                                    slots={{ textField: TextField }}
+                                    // Use slots for TextField
+                                    slotProps={{
+                                        textField: {
+                                            variant: "standard",
+                                            className: "cust-violet-input-field date-field w-100 me-3"
+                                        }
+                                    }}
+                                />
+                            </LocalizationProvider>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div className="table-container px-3">
-                <div className="searchbar-div my-3">
-                    <div className="buttonCreate">
-                        <button className='create' onClick={exportData}>Export</button>
-                    </div>
-                    <div className="d-flex align-items-center">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                variant="standard"
-                                label="Start Date"
-                                className="cust-violet-input-field date-field w-100 me-3"
-                                value={startDate ? dayjs(startDate, "DD-MM-YYYY") : null}
-                                format="DD-MM-YYYY"
-                                onChange={(newValue) => {
-                                    if (!newValue) return;
-                                    setStartDate(newValue.format("DD-MM-YYYY"));
-                                }}
-                                slots={{ textField: TextField }}
-                                // Use slots for TextField
-                                slotProps={{
-                                    textField: {
-                                        variant: "standard",
-                                        className: "cust-violet-input-field date-field w-100 me-3"
-                                    }
-                                }}
-                            />
-                        </LocalizationProvider>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                variant="standard"
-                                label="End Date"
-                                className="cust-violet-input-field date-field w-100 me-3"
-                                value={endDate ? dayjs(endDate, "DD-MM-YYYY") : null}
-                                format="DD-MM-YYYY"
-                                onChange={(newValue) => {
-                                    if (!newValue) return;
-                                    setEndDate(newValue.format("DD-MM-YYYY"));
-                                }}
-                                slots={{ textField: TextField }}
-                                // Use slots for TextField
-                                slotProps={{
-                                    textField: {
-                                        variant: "standard",
-                                        className: "cust-violet-input-field date-field w-100 me-3"
-                                    }
-                                }}
-                            />
-                        </LocalizationProvider>
-                    </div>
-                </div>
-                <div className="card table-card mt-3" style={{ width: "100%" }}>
-                    <div className="tableContainer activity-table" style={{ overflowX: "auto", maxWidth: "calc(100vw - 360px)" }}>
-                        <table className="table" style={{ minWidth: "100vw", tableLayout: "auto", paddingInline: '1em' }}>
-                            <thead>
-                                <tr>
-                                    <th className='table-heading'>
-                                        <div className='d-flex align-items-center'>
-                                            <input
-                                                type="checkbox"
-                                                className='checkboxStyle me-3'
-                                                checked={selectedRows.length === tableData.length}
-                                                onChange={handleSelectAll}
-                                            />
-                                            Date
-                                        </div>
-
-                                    </th>
-                                    <th className='table-heading'>Vendor Name</th>
-                                    <th className='table-heading'>Activity Number</th>
-                                    <th className='table-heading'>Activity Name</th>
-                                    <th className='table-heading'>Activity Description</th>
-                                    <th className='table-heading'>No Of Tasks</th>
-                                    <th className='table-heading'>No of Tasks Completed</th>
-                                    <th className='table-heading'>PO Date</th>
-                                    <th className='table-heading'>PO Number</th>
-                                    <th className='table-heading'>PO Value</th>
-                                    <th className='table-heading'>Status</th>
-                                    <th className='table-heading'>Store Confirmation</th>
-                                    <th className='table-heading'>Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableData.length > 0 ? (
-                                    tableData.map((data, index) => (
-                                        <tr key={index} className='table-row-color' onClick={() => navigate('/app/edit-activity')} >
-                                            <td>
-                                                <div className='d-flex align-items-center'>
-                                                    <input
-                                                        type="checkbox"
-                                                        className='checkboxStyle me-3'
-                                                        checked={selectedRows.includes(index)}
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        onChange={(e) => {
-                                                            handleRowSelect(index);
-                                                        }}
-                                                    />
-                                                    {data.endDate}
-                                                </div>
-                                            </td>
-                                            <td>{data.vendorName}</td>
-                                            <td>{data.activityNumber}</td>
-                                            <td>{data.activityName}</td>
-                                            <td>{data.activityDesc}</td>
-                                            <td>{data.tasks}</td>
-                                            <td>{data.tasksCompleted}</td>
-                                            <td>{data.poDate}</td>
-                                            <td>{data.poNumber}</td>
-                                            <td>{data.poValue}</td>
-                                            <td>{data.selectedStatus}</td>
-                                            <td>{data.store}</td>
-                                            <td>{data.remarks}</td>
-                                        </tr>
-                                    ))
-                                ) : (
+                    <div className="card table-card mt-3" style={{ width: "100%" }}>
+                        <div className="tableContainer activity-table" style={{ overflowX: "auto", maxWidth: "calc(100vw - 360px)" }}>
+                            <table className="table" style={{ minWidth: "100vw", tableLayout: "auto", paddingInline: '1em' }}>
+                                <thead>
                                     <tr>
-                                        <td colSpan="13" className="text-center">No records found</td>
+                                        <th className='table-heading'>
+                                            <div className='d-flex align-items-center'>
+                                                <input
+                                                    type="checkbox"
+                                                    className='checkboxStyle me-3'
+                                                    checked={selectedRows.length === tableData.length}
+                                                    onChange={handleSelectAll}
+                                                />
+                                                Date
+                                            </div>
+
+                                        </th>
+                                        <th className='table-heading'>Vendor Name</th>
+                                        <th className='table-heading'>Activity Number</th>
+                                        <th className='table-heading'>Activity Name</th>
+                                        <th className='table-heading'>Activity Description</th>
+                                        <th className='table-heading'>No Of Tasks</th>
+                                        <th className='table-heading'>No of Tasks Completed</th>
+                                        <th className='table-heading'>PO Date</th>
+                                        <th className='table-heading'>PO Number</th>
+                                        <th className='table-heading'>PO Value</th>
+                                        <th className='table-heading'>Status</th>
+                                        <th className='table-heading'>Store Confirmation</th>
+                                        <th className='table-heading'>Remarks</th>
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {tableData.length > 0 ? (
+                                        tableData.map((data, index) => (
+                                            <tr key={index} className='table-row-color' onClick={() => navigate('/app/edit-activity')} >
+                                                <td>
+                                                    <div className='d-flex align-items-center'>
+                                                        <input
+                                                            type="checkbox"
+                                                            className='checkboxStyle me-3'
+                                                            checked={selectedRows.includes(index)}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            onChange={(e) => {
+                                                                handleRowSelect(index);
+                                                            }}
+                                                        />
+                                                        {data.endDate}
+                                                    </div>
+                                                </td>
+                                                <td>{data.vendorName}</td>
+                                                <td>{data.activityNumber}</td>
+                                                <td>{data.activityName}</td>
+                                                <td>{data.activityDesc}</td>
+                                                <td>{data.tasks}</td>
+                                                <td>{data.tasksCompleted}</td>
+                                                <td>{data.poDate}</td>
+                                                <td>{data.poNumber}</td>
+                                                <td>{data.poValue}</td>
+                                                <td>{data.selectedStatus}</td>
+                                                <td>{data.store}</td>
+                                                <td>{data.remarks}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="13" className="text-center">No records found</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

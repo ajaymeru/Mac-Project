@@ -300,7 +300,7 @@ function CreateActivity() {
                         </LocalizationProvider>
                     </div>
                     <div className="col-12 mb-3">
-                        <TextField className='w-100' multiline rows="3" id="outlined-basic" variant="standard" label="Activity Description" autoComplete="off" 
+                        <TextField className='w-100' multiline rows="1" id="outlined-basic" variant="standard" label="Activity Description" autoComplete="off" 
                             onChange={(ev) => {
                                 setFormObj({...formObj, description: ev.target.value})
                             }}

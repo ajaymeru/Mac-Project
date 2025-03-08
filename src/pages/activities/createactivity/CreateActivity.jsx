@@ -194,7 +194,7 @@ function CreateActivity() {
                             </div>
                             <div className="col-12 col-lg-8">
                                 {/* <input type="text" className="form-control" placeholder="" /> */}
-                                <textarea className="form-control" rows="3"></textarea>
+                                <textarea className="form-control" rows="1"></textarea>
                             </div>
                         </div>
                     </div>

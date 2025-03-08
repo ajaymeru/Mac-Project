@@ -1,8 +1,12 @@
 .status-card-body {
-    background-color: rgb(98, 98, 98);
-    color: white;
+    background-color: #fbfbfb;
+    /* color: white; */
     transition: background-color 0.3s ease;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    font-size: .82em;
 }
 
 .status-card-body:hover {
@@ -11,17 +15,37 @@
 }
 
 .ActivitySummaryClient{
-    padding: 30px;
-    height: calc(100vh - 80px);
-    width: calc(100vw - 300px);
+    /* padding: 30px; */
+    /* height: calc(100vh - 80px);
+    width: calc(100vw - 300px); */
     /* background-color: #e2e1e2; */
     overflow: auto;
+    border-radius: 8px;
 }
 
 .ActivitySummaryClient{
-    padding: 30px;
-    height: calc(100vh - 80px);
-    width: calc(100vw - 300px);
-    background-color: #e2e1e2;
+    /* padding: 30px; */
+    /* height: calc(100vh - 80px);
+    width: calc(100vw - 300px); */
     overflow: auto;   
+    box-shadow: 0 0 2px 2px #e2e1e2;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.status-grid {
+    display: flex;
+    justify-content: space-between; /* Distribute the items evenly across the row */
+    flex-wrap: wrap; /* Allow items to wrap if necessary */
+    gap: 10px;
+}
+
+.custom-col {
+    flex: 1 1 12%; /* This will give each item a width of 12%, so 7 items fit in one row */
+    margin-bottom: 1rem; /* Optional space between rows */
+}
+
+.ActivitySummaryClient h4{
+    font-size: 1em;
+    font-weight: bold;
 }

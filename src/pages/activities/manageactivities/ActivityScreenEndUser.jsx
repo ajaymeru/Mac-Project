@@ -85,9 +85,9 @@ const ActivityScreenEndUser = () => {
     });
 
     return (
-        <div className="ActivityScreenEndUser container-fluid " style={{}}>
+        <div className="ActivityScreenEndUser container-fluid" style={{}}>
+            <h5 className="col-12 mb-3 create-employee">Activity Screen EndUser</h5>
             <div className="data-table row p-3">
-                <h4 className="col-12 mb-3">Activity Screen EndUser</h4>
                 <div className="enduser col-12">
                     <div className="row mb-3">
                         <label className="col-sm-2 col-form-label">Activity Name:</label>

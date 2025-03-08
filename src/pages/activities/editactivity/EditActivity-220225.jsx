@@ -376,7 +376,7 @@ function EditActivity() {
                             </div>
                             <div className="col-12 col-lg-8">
                                 {/* <input type="text" className="form-control" placeholder="" /> */}
-                                <textarea className="form-control" rows="3" value={formObj.activityDesc} 
+                                <textarea className="form-control" rows="1" value={formObj.activityDesc} 
                                 onChange={(e) => setFormObj({...formObj, activityDesc: e.target.value})}></textarea>
                             </div>
                         </div>
