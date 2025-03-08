@@ -83,6 +83,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '01',
+          storeCode:"SC001",
+          storeName:"Store 1",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -95,6 +97,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '02',
+          storeCode:"SC001",
+          storeName:"Store 1",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -107,6 +111,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '03',
+          storeCode:"SC001",
+          storeName:"Store 1",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -127,6 +133,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '01',
+          storeCode:"SC001",
+          storeName:"Store 1",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -147,6 +155,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '01',
+          storeCode:"SC002",
+          storeName:"Store 2",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -159,6 +169,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '02',
+          storeCode:"SC002",
+          storeName:"Store 2",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -171,6 +183,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '03',
+          storeCode:"SC002",
+          storeName:"Store 2",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -191,6 +205,8 @@ function EditActivity() {
         {
           title: 'Lorem',
           itemCode: '01',
+          storeCode:"SC002",
+          storeName:"Store 2",
           description: 'Lorem Ipsum dolor sit amet',
           width: '20',
           height: '50',
@@ -449,6 +465,8 @@ function EditActivity() {
     title: '',
     itemCode: '',
     description: '',
+    storeCode: '',
+    storeName: '',
   });
 
   const filteredItems = allItems.filter((item) => {
@@ -977,22 +995,12 @@ function EditActivity() {
                 <thead className="table-head-color">
                   <tr>
                     <th className="table-heading">Task Number</th>
-                    <th className="table-heading">
-                      Task Name
-                     
-                    </th>
-                    <th className="table-heading">
-                      Element Name
-                     
-                    </th>
-                    <th className="table-heading">
-                      Item Code
-                     
-                    </th>
-                    <th className="table-heading">
-                      Item Description
-                     
-                    </th>
+                    <th className="table-heading">Task Name</th>
+                    <th className="table-heading">Store Code</th> {/* New Column */}
+                    <th className="table-heading">Store Name</th> {/* New Column */}
+                    <th className="table-heading">Element Name</th>
+                    <th className="table-heading">Item Code</th>
+                    <th className="table-heading">Item Description</th>
                     <th className="table-heading">Width</th>
                     <th className="table-heading">Height</th>
                     <th className="table-heading">Quantity</th>
@@ -1007,11 +1015,17 @@ function EditActivity() {
                     <th className="table-heading table-search">
                       <input
                         type="text"
-                        className="filter-input "
+                        className="filter-input"
                         value={filters.taskName}
                         onChange={(e) => setFilters({ ...filters, taskName: e.target.value })}
                         placeholder="Filter"
                       />
+                    </th>
+                    <th className="table-heading table-search">
+                     
+                    </th>
+                    <th className="table-heading table-search">
+                      
                     </th>
                     <th className="table-heading table-search">
 
@@ -1024,7 +1038,7 @@ function EditActivity() {
                       />
                     </th>
                     <th className="table-heading table-search">
-     
+
                       <input
                         type="text"
                         className="filter-input"
@@ -1034,7 +1048,7 @@ function EditActivity() {
                       />
                     </th>
                     <th className="table-heading table-search">
-   
+
                       <input
                         type="text"
                         className="filter-input"
@@ -1047,7 +1061,6 @@ function EditActivity() {
                     <th className="table-heading"></th>
                     <th className="table-heading"></th>
                     <th className="table-heading"> </th>
-                    <th className="table-heading"></th>
                     <th className="table-heading"></th>
                     <th className="table-heading"></th>
                     <th className="table-heading"></th>
@@ -1081,6 +1094,36 @@ function EditActivity() {
                               handleTaskChange(
                                 item.taskIndex,
                                 'taskName',
+                                e.target.value,
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            className="table-data-form-control"
+                            value={item.storeCode || ''}
+                            onChange={(e) =>
+                              handleItemChange(
+                                item.taskIndex,
+                                item.itemIndex,
+                                'storeCode',
+                                e.target.value,
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            className="table-data-form-control"
+                            value={item.storeName || ''}
+                            onChange={(e) =>
+                              handleItemChange(
+                                item.taskIndex,
+                                item.itemIndex,
+                                'storeName',
                                 e.target.value,
                               )
                             }
@@ -1254,7 +1297,7 @@ function EditActivity() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="13" className="text-center">
+                      <td colSpan="15" className="text-center">
                         No records found
                       </td>
                     </tr>

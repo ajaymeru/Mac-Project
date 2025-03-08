@@ -1,0 +1,7 @@
+.ActivityScreenEndUser{
+    padding: 30px;
+    height: calc(100vh - 80px);
+    width: calc(100vw - 300px);
+    /* background-color: #e2e1e2; */
+    overflow: auto;
+}

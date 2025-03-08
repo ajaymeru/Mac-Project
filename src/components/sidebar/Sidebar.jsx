@@ -100,6 +100,24 @@ function Sidebar({ stateVal, trigger, role, accountType }) {
               <p className='actualText'>Activity Summary</p>
             </div>
           </Link>
+          <Link to="/app/activity-summary-user" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/activity-summary-user' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+              <MdOutlineGroup className='icon' />
+              <p className='actualText'>Activity Summary(user)</p>
+            </div>
+          </Link>
+          <Link to="/app/activity-screen-enduser" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/activity-screen-enduser' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+              <MdOutlineGroup className='icon' />
+              <p className='actualText'>Activity Screen EndUser</p>
+            </div>
+          </Link>
+          <Link to="/app/activity-vendor-user" onClick={() => {closeSideMenu()}} className="sidebar-link">
+            <div className={pathname === '/app/activity-vendor-user' ? 'subContent mb-2 active' : 'subContent mb-2' }>
+              <MdOutlineGroup className='icon' />
+              <p className='actualText'>Activity Vendor User</p>
+            </div>
+          </Link>
           <Link to="/app/create-vendor-request" onClick={() => {closeSideMenu()}} className="sidebar-link">
             <div className={pathname === '/app/create-vendor-request' ? 'subContent mb-2 active' : 'subContent mb-2' }>
               <MdOutlinePersonAdd className='icon' />
