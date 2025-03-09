@@ -176,7 +176,7 @@ const ActivityVendorUser = () => {
                         <div className="buttonCreate">
                             <button className='create' onClick={exportData}>Export</button>
                         </div>
-                        <div className="d-flex align-items-center">
+                        {/* <div className="d-flex align-items-center">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     variant="standard"
@@ -219,7 +219,7 @@ const ActivityVendorUser = () => {
                                     }}
                                 />
                             </LocalizationProvider>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="card table-card mt-3" style={{ width: "100%" }}>
                         <div className="tableContainer activity-table" style={{ overflowX: "auto", maxWidth: "calc(100vw - 360px)" }}>

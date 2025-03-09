@@ -1,6 +1,6 @@
 .resetContainer{
   padding: 30px;
-  background: #e2e1e2;
+  /* background: #e2e1e2; */
   height: calc(100vh - 80px);
   overflow: auto;
 }
@@ -8,4 +8,7 @@
   .resetContainer{
       padding: 20px 15px;
   }
+}
+.MuiFormControl-root label{
+  font-size: .82em !important;
 }

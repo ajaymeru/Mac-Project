@@ -132,21 +132,25 @@ function ResetPassword() {
     <div className="resetContainer">
       <div className="row justify-content-center px-0 mx-0">
         <div className="col-12 px-0">
-          <h5 className="loginText">Reset Password</h5>
+          <h5 className="create-employee mb-3">Reset Password</h5>
         </div>
       </div>
-      <div className="row justify-content-center px-0 mx-0">
-        <div className="col-12 h-100 bg-white p-4 card">
+      <div className="row justify-content-center px-0 mx-0" style={{boxShadow:"0 0 2px 2px #e2e1e2", border:"none", borderRadius:"10px"}}>
+        <div className="col-12 h-100 bg-white p-4 card ">
           <TextField
             label="Old Password"
             variant="outlined"
             type={showPassword ? "text" : "password"}
-            className="mb-4 w-100"
+            className="mb-4 w-100 text-field"
             autoComplete="off"
+            
             onChange={(ev) => {
               setUserObj({ ...userObj, oldPassword: ev.target.value });
             }}
             InputProps={{
+              style:{
+                fontSize:".82em"
+              },
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
