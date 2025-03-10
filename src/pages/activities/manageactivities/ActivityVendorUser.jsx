@@ -17,17 +17,19 @@ const ActivityVendorUser = () => {
         // { "status": "Assigned", "count": 20 },
         // { "status": "Accepted", "count": 10 },
         // { "status": "Rejected", "count": 20 },
-        { "status": "Inprogress", "count": 10 },
+        
         // { "status": "Dispatched", "count": 20 },
-        { "status": "Completed", "count": 20 }
+        { "status": "Completed", "count": 1},
+        { "status": "Pending", "count": 2 }
     ]
 
     const searchfields = [
-        // { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
-        // { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
-        { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
+        { "field": "Status", "type": "text", "placeholder": "Enter Status" },
         { "field": "Start Date", "type": "date", "placeholder": "Enter Start Date" },
         { "field": "End Date", "type": "date", "placeholder": "Enter End Date" },
+        // { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
+        // { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
+        // { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
     ]
 
     const [startDate, setStartDate] = useState(null);
@@ -112,9 +114,81 @@ const ActivityVendorUser = () => {
 
     return (
         <div className="padding">
-            <h5 className='mb-3 create-employee'>Activity Vendor User</h5>
+            <h5 className='mb-3 create-employee'>Activity (Vendor User)</h5>
             <div className='ActivitySummaryClient'>
-                <div className="filters-data container d-flex flex-column p-3">
+                <div className="filters-data">
+                    <div className="filters">
+                        <div className='d-flex justify-content-between align-items-center '>
+                            <h4 >Search  </h4>
+                            {/* <IoSearch /> */}
+                            <div className="buttonCreate">
+                                <button className='create'>Submit</button>
+                            </div>
+                        </div>
+                        {/* <div className="row">
+                            {searchfields.map((field, index) => (
+                            <div key={index} className="mb-1">
+                                <label className="col-sm-2 form-label pl-3">{field.field}</label>
+                                <div className="col-sm-4">
+                                {field.type === "dropdown" ? (
+                                    <TextField
+                                    select
+                                    className="form-control"
+                                    placeholder={field.placeholder}
+                                    variant="standard"
+                                    InputProps={{
+                                        style: {
+                                        border: "1px solid #ced4da",
+                                        borderRadius: "4px",
+                                        },
+                                    }}
+                                    >
+                                    {field.options && field.options.length > 0 ? (
+                                        field.options.map((option, idx) => (
+                                        <MenuItem key={idx} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                        ))
+                                    ) : (
+                                        <MenuItem disabled>No options available</MenuItem>
+                                    )}
+                                    </TextField>
+                                ) : (
+                                    <input
+                                    type={field.type}
+                                    className="form-control"
+                                    placeholder={field.placeholder}
+                                    />
+                                )}
+                                </div>
+                            </div>
+                            ))}
+                        </div> */}
+                        <div className="row px-2">
+                            {searchfields.map((field, index) => {
+                                return (
+                                    <div key={index} className="field">
+                                        <label>{field.field}</label>
+                                        <input type={field.type} placeholder={field.placeholder} />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        
+                    </div>
+                    <div className="data">
+                        <h4>Status Summary</h4>
+                        {statusActivities.map((status, index) => {
+                            return (
+                                <div key={index} className="status">
+                                    <div className="status-name">{status.status}</div>
+                                    <div className="status-count">{status.count}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+                {/* <div className="filters-data container d-flex flex-column p-3">
                     <div className="row mb-1">
                         <div className="col-12">
                             <h6><strong>Search <IoSearch /></strong> </h6>
@@ -169,13 +243,13 @@ const ActivityVendorUser = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="table-container px-3">
                     <div className="searchbar-div my-3">
-                        <div className="buttonCreate">
+                        {/* <div className="buttonCreate">
                             <button className='create' onClick={exportData}>Export</button>
-                        </div>
+                        </div> */}
                         {/* <div className="d-flex align-items-center">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker

@@ -478,12 +478,107 @@ function EditActivity() {
     );
   });
 
+  const [selectedRows, setSelectedRows] = useState([]);
+  
+        const handleSelectAll = (event) => {
+            if (event.target.checked) {
+                const allRowIds = filteredItems.map((data, index) => index);
+                setSelectedRows(allRowIds);
+            } else {
+                setSelectedRows([]);
+            }
+        };
+  
+        const handleRowSelect = (index) => {
+            setSelectedRows((prevSelectedRows) => {
+                if (prevSelectedRows.includes(index)) {
+                    return prevSelectedRows.filter((rowIndex) => rowIndex !== index);
+                } else {
+                    return [...prevSelectedRows, index];
+                }
+            });
+        };
+
+        const statusActivities = [
+            // { "status": "Status", "count": "Count", "completion_percentage": "Completion Percentage" },
+            { "status": "In-progress", "count": 10, "completion_percentage": 27.78 },
+            
+            
+            // { "status": "Accepted", "count": 10 },
+            // { "status": "Rejected", "count": 20 },
+            // { "status": "Inprogress", "count": 10 },
+            // { "status": "Dispatched", "count": 20 },
+            { "status": "Completed", "count": 26, "completion_percentage": 72.22 },
+            { "status": "Total", "count": 10, "completion_percentage": "" },
+        ]
+    
+        const searchfields = [
+        
+            { "field": "Activity Name", "type": "text", "placeholder": "Enter Activity Name" },
+            { "field": "Activity Number", "type": "text", "placeholder": "Enter Activity Number" },
+            // { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
+            { "field": "Activity Date", "type": "date", "placeholder": "Enter Activity Date" },
+            { "field": "Expected Completion Date", "type": "date", "placeholder": "Enter Expected Completion Date" },
+        ]
+
   return (
     <div className="employeeContainer">
       <h5 className="create-employee">Edit Activity</h5>
+      
       <div className="card forms-card">
+      <div className="filters-data">
+        <div className="filters px-0">
+            
+            {searchfields.map((field, index) => {
+                return (
+                    <div key={index} className="field">
+                        <label>{field.field}</label>
+                        <input type={field.type} placeholder={field.placeholder} />
+                    </div>
+                )
+            })}
+            
+        </div>
+        {/* <div className="data">
+            <div className='row justify-content-center align-items-center'>
+                <div className="form-label">Status</div>
+                <div className="form-label">Count</div>
+                <div className="form-label">Completion %</div>
+            </div>
+            {statusActivities.map((status, index) => {
+                return (
+                    <div key={index} className="status">
+                        <div className="status-name">{status.status}</div>
+                        <div className="status-count">{status.count}</div>
+                        <div className="status-count">{status.completion_percentage}</div>
+                    </div>
+                )
+            })}
+        </div> */}
+        <div className="data">
+  <table className="status-edit-table">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Count</th>
+        <th>Completion %</th>
+      </tr>
+    </thead>
+    <tbody>
+        {statusActivities.map((status, index) => (
+            <tr key={index}>
+            <td className="status-count">{status.status}</td>
+            <td className="status-count">{status.count}</td>
+            <td className="status-count">{status.completion_percentage}</td>
+            </tr>
+        ))}
+    </tbody>
+  </table>
+</div>
+
+    </div>
         <div className="row mb-3">
-          <div className="col-12 col-lg-6 mb-3">
+          {/* <div className="col-12 col-lg-6 mb-3">
             <div className="row align-items-center">
               <div className="col-12 col-lg-4">
                 <label className="form-label">Activity Number</label>
@@ -553,7 +648,7 @@ function EditActivity() {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="col-12 col-lg-6 mb-3">
             <div className="row align-items-center">
               <div className="col-12 col-lg-4">
@@ -799,7 +894,7 @@ function EditActivity() {
               </p>
             </div>
           </div>
-          <div className="col-12 col-lg-6 mb-3">
+          <div className="col-12 col-lg-6">
             <h6 className="mb-3 text-black" style={{ textWrap: 'nowrap' }}>
               <strong>Commercial Documents</strong>
             </h6>
@@ -994,7 +1089,15 @@ function EditActivity() {
               >
                 <thead className="table-head-color">
                   <tr>
-                    <th className="table-heading">Task Number</th>
+                    <th className="table-heading">
+                    <input
+                        type="checkbox"
+                        className='checkboxStyle me-3'
+                        checked={selectedRows.length === filters.length}
+                        onChange={handleSelectAll}
+                    />
+                      
+                      Task Number</th>
                     <th className="table-heading">Task Name</th>
                     <th className="table-heading">Store Code</th> {/* New Column */}
                     <th className="table-heading">Store Name</th> {/* New Column */}
@@ -1011,7 +1114,19 @@ function EditActivity() {
                     <th className="table-heading">Actions</th>
                   </tr>
                   <tr>
-                    <th className="table-heading"></th>
+                    <div className='d-flex align-items-center'>
+                        {/* <input
+                            type="checkbox"
+                            className='checkboxStyle me-3'
+                            checked={selectedRows.includes()}
+                            onClick={(e) => e.stopPropagation()}
+                            onChange={(e) => {
+                                handleRowSelect();
+                            }}
+                        /> */}
+                        <th className="table-heading"></th>
+                    </div>
+                    
                     <th className="table-heading table-search">
                       <input
                         type="text"
@@ -1025,7 +1140,13 @@ function EditActivity() {
                      
                     </th>
                     <th className="table-heading table-search">
-                      
+                      <input
+                        type="text"
+                        className="filter-input"
+                        value={filters.storeName}
+                        onChange={(e) => setFilters({ ...filters, storeName: e.target.value })}
+                        placeholder="Filter"
+                      />
                     </th>
                     <th className="table-heading table-search">
 
@@ -1072,18 +1193,29 @@ function EditActivity() {
                     filteredItems.map((item, index) => (
                       <tr key={index} className="table-row-color">
                         <td>
-                          <input
-                            type="text"
-                            className="table-data-form-control"
-                            value={item.taskNumber}
-                            onChange={(e) =>
-                              handleTaskChange(
-                                item.taskIndex,
-                                'taskNumber',
-                                e.target.value,
-                              )
-                            }
-                          />
+                        <div className='d-flex align-items-center'>
+                            <input
+                                type="checkbox"
+                                className='checkboxStyle me-3'
+                                checked={selectedRows.includes()}
+                                onClick={(e) => e.stopPropagation()}
+                                onChange={(e) => {
+                                    handleRowSelect();
+                                }}
+                            />
+                            <input
+                                type="text"
+                                className="table-data-form-control"
+                                value={item.taskNumber}
+                                onChange={(e) =>
+                                handleTaskChange(
+                                    item.taskIndex,
+                                    'taskNumber',
+                                    e.target.value,
+                                )
+                                }
+                            />
+                          </div> 
                         </td>
                         <td>
                           <input
@@ -1279,7 +1411,7 @@ function EditActivity() {
                             }
                           />
                         </td>
-                        <td className="d-flex align-items-center">
+                        <td className="d-flex align-items-center ">
                           <button
                             className="btn btn-delete me-2"
                             onClick={() => deleteItem(item.taskIndex, item.itemIndex)}

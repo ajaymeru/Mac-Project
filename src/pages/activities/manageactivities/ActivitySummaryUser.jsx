@@ -8,16 +8,36 @@ import * as XLSX from 'xlsx';
 import { TextField, MenuItem } from '@mui/material'; // Import MenuItem for dropdown
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { CheckBox } from '@mui/icons-material';
 
 const ActivitySummaryClientCopy = () => {
     const navigate = useNavigate();
 
+    // const statusActivities = [
+    //     // { "status": "New", "count": 10 },
+    //     // { "status": "Assigned", "count": 20 },
+    //     // { "status": "Accepted", "count": 10 },
+    //     // { "status": "Rejected", "count": 20 },
+    //     { "status": "Inprogress", "count": 10 },
+    //     // { "status": "Dispatched", "count": 20 },
+    //     { "status": "Completed", "count": 20 }
+    // ]
+
+    // const searchfields = [
+    //     { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
+    //     { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
+    //     { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
+    //     // { "field": "Start Date", "type": "date", "placeholder": "Enter Start Date" },
+    //     // { "field": "End Date", "type": "date", "placeholder": "Enter End Date" },
+    // ]
+
     const statusActivities = [
-        // { "status": "New", "count": 10 },
-        // { "status": "Assigned", "count": 20 },
+        { "status": "Total", "count": 20 },
+        { "status": "Pending", "count": 10 },
+        
         // { "status": "Accepted", "count": 10 },
         // { "status": "Rejected", "count": 20 },
-        { "status": "Inprogress", "count": 10 },
+        // { "status": "Inprogress", "count": 10 },
         // { "status": "Dispatched", "count": 20 },
         { "status": "Completed", "count": 20 }
     ]
@@ -25,7 +45,15 @@ const ActivitySummaryClientCopy = () => {
     const searchfields = [
         { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
         { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
-        { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
+        // { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["New", "Assigned", "Accepted", "Rejected", "Inprogress", "Dispatched", "Completed"] },
+        // { "field": "Start Date", "type": "date", "placeholder": "Enter Start Date" },
+        // { "field": "End Date", "type": "date", "placeholder": "Enter End Date" },
+    ]
+
+    const statusfields = [
+        // { "field": "Store Code", "type": "text", "placeholder": "Enter Store Code" },
+        // { "field": "Store Name", "type": "text", "placeholder": "Enter Store Name" },
+        { "field": "Status", "type": "dropdown", "placeholder": "Select Status", "options": ["All", "Pending","Completed"] },
         // { "field": "Start Date", "type": "date", "placeholder": "Enter Start Date" },
         // { "field": "End Date", "type": "date", "placeholder": "Enter End Date" },
     ]
@@ -59,7 +87,7 @@ const ActivitySummaryClientCopy = () => {
             selectedStatus: "Pending",
             // store: "Confirmed",
             remarks: "Default remarks",
-            Action: "complete"
+            
         },
         {
             endDate: "2024-02-20",
@@ -79,7 +107,7 @@ const ActivitySummaryClientCopy = () => {
             selectedStatus: "In-Progress",
             store: "Pending",
             remarks: "Lorem",
-            Action: "pending"
+            
         }
     ];
 
@@ -108,9 +136,41 @@ const ActivitySummaryClientCopy = () => {
 
     return (
         <div className="padding">
-            <h5 className='create-employee mb-3'>Activity Summary user</h5>
+            <h5 className='create-employee mb-3'>Activity Summary (User)</h5>
             <div className='ActivitySummaryClient'>
-                <div className="filters-data container d-flex flex-column p-3">
+            <div className="filters-data">
+                    <div className="filters">
+                        <div className='d-flex justify-content-between align-items-center'>
+                            <h4>Store Info</h4>
+                            {/* <IoSearch /> */}
+                            {/* <div className="buttonCreate">
+                                <button className='create'>Submit</button>
+                            </div> */}
+                        </div>
+                        
+                        {searchfields.map((field, index) => {
+                            return (
+                                <div key={index} className="field">
+                                    <label>{field.field}</label>
+                                    <input type={field.type} placeholder={field.placeholder} />
+                                </div>
+                            )
+                        })}
+                        
+                    </div>
+                    <div className="data">
+                        <h4>Status Summary</h4>
+                        {statusActivities.map((status, index) => {
+                            return (
+                                <div key={index} className="status">
+                                    <div className="status-name">{status.status}</div>
+                                    <div className="status-count">{status.count}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+                {/* <div className="filters-data container d-flex flex-column p-3">
                     <div className="row mb-1">
                         <div className="col-12">
                             <h4>Search <IoSearch /> </h4>
@@ -165,13 +225,38 @@ const ActivitySummaryClientCopy = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="table-container px-3">
                     <div className="searchbar-div my-3">
-                        <div className="buttonCreate">
-                            <button className='create' onClick={exportData}>Export</button>
-                        </div>
+                        {statusfields.map((field, index) => (
+                            <div key={index} className="col-md-2 mb-1">
+                                <label className="form-label pl-3">{field.field}</label>
+                                {field.type === "dropdown" ? (
+                                    <TextField
+                                        select
+                                        className="form-control w-100"
+                                        placeholder={field.placeholder}
+                                        variant="standard"
+                                        InputProps={{
+                                            style: {
+                                                border: '1px solid #ced4da',
+                                                borderRadius: '4px',
+                                            }
+                                        }}
+                                    >
+                                        {field.options.map((option, idx) => (
+                                            <MenuItem key={idx} value={option}>
+                                                {option}
+                                            </MenuItem>
+                                        ))}
+                                        
+                                    </TextField>
+                                ) : (
+                                    <input type={field.type} className="form-control" placeholder={field.placeholder} />
+                                )}
+                            </div>
+                        ))}
                         <div className="d-flex align-items-center">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
@@ -250,7 +335,7 @@ const ActivitySummaryClientCopy = () => {
                                         <th className='table-heading'>Status</th>
                                         {/* <th className='table-heading'>Store Confirmation</th> */}
                                         <th className='table-heading'>Remarks</th>
-                                        <th className='table-heading'>Action</th>
+                                        <th className='table-heading'>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -287,7 +372,11 @@ const ActivitySummaryClientCopy = () => {
                                                 <td>{data.selectedStatus}</td>
                                                 {/* <td>{data.store}</td> */}
                                                 <td>{data.remarks}</td>
-                                                <td>{data.Action}</td>
+                                                <td>
+                                                    <div className='text-center'>
+                                                        <CheckBox size={20} color='#008000' />
+                                                    </div>
+                                                </td>
                                             </tr>
                                         ))
                                     ) : (

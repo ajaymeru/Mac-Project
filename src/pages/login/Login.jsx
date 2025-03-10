@@ -57,7 +57,7 @@ function Login() {
                 localStorage.setItem('userData', JSON.stringify({email: formData.email, role: 1, username: 'Admin'}));
                 return;
             }else if(formData.email === 'client@gmail.com' && formData.password === '123456'){
-                navigate('/app/manage-activities');
+                navigate('/app/manage-activitie');
                 localStorage.setItem('userData', JSON.stringify({email: formData.email, role: 2, username: 'Client'}));
                 return;
             }else if(formData.email === 'vendor@gmail.com' && formData.password === '123456'){

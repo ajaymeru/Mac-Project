@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import "./ActivitySummaryClient.css"
-import { IoSearch } from "react-icons/io5";
+import { IoEye, IoSearch } from "react-icons/io5";
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
 import { TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Delete, Edit } from '@mui/icons-material';
+import { MdDelete, MdEdit, MdRemoveRedEye } from 'react-icons/md';
 
 
 
@@ -43,14 +45,14 @@ const ActivitySummaryClient = () => {
 
     const defaultTableData = [
         {
-            endDate: "2024-02-18",
+            endDate: "10-03-2025",
             vendorName: "Default Vendor",
             activityNumber: "1234",
             activityName: "Default Activity",
             activityDesc: "Description here",
             tasks: 10,
             tasksCompleted: 5,
-            poDate: "2024-02-10",
+            poDate: "10-03-2025",
             poNumber: "PO-5678",
             poValue: "$1000",
             selectedStatus: "Pending",
@@ -58,14 +60,14 @@ const ActivitySummaryClient = () => {
             remarks: "Default remarks"
         },
         {
-            endDate: "2024-02-20",
+            endDate: "10-03-2025",
             vendorName: "Vendor",
             activityNumber: "123456",
             activityName: "Activity",
             activityDesc: "Lorem Ipusm",
             tasks: 20,
             tasksCompleted: 10,
-            poDate: "2024-02-30",
+            poDate: "10-03-2025",
             poNumber: "PO-1234",
             poValue: "$3000", // Changed from povalue to poValue for consistency
             selectedStatus: "In-Progress",
@@ -99,11 +101,18 @@ const ActivitySummaryClient = () => {
 
     return (
         <div className="padding">
-            <h5 className='create-employee mb-3'>Activity Summary Client</h5>
+            <h5 className='create-employee mb-3'>Activity Summary (Client)</h5>
             <div className='ActivitySummaryClient '>
                 <div className="filters-data">
                     <div className="filters">
-                        <h4 >Search <IoSearch /> </h4>
+                        <div className='d-flex justify-content-between align-items-center'>
+                            <h4 >Search  </h4>
+                            {/* <IoSearch /> */}
+                            <div className="buttonCreate">
+                                <button className='create'>Submit</button>
+                            </div>
+                        </div>
+                        
                         {searchfields.map((field, index) => {
                             return (
                                 <div key={index} className="field">
@@ -112,9 +121,10 @@ const ActivitySummaryClient = () => {
                                 </div>
                             )
                         })}
+                        
                     </div>
                     <div className="data">
-                        <h4>Summary</h4>
+                        <h4>Status Summary</h4>
                         {statusActivities.map((status, index) => {
                             return (
                                 <div key={index} className="status">
@@ -205,6 +215,7 @@ const ActivitySummaryClient = () => {
                                         <th className='table-heading'>Status</th>
                                         <th className='table-heading'>Store Confirmation</th>
                                         <th className='table-heading'>Remarks</th>
+                                        <th className='table-heading'>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -237,6 +248,19 @@ const ActivitySummaryClient = () => {
                                                 <td>{data.selectedStatus}</td>
                                                 <td>{data.store}</td>
                                                 <td>{data.remarks}</td>
+                                                <td>
+                                                    <div className='d-flex justify-content-center align-items-center'>
+                                                    {/* <button className="btn btn- me-2">
+                                                        <MdRemoveRedEye  />
+                                                    </button> */}
+                                                        <button className="btn btn-add me-2">
+                                                            <MdEdit /> 
+                                                        </button>
+                                                        <button className="btn btn-delete me-2">
+                                                            <MdDelete />
+                                                        </button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         ))
                                     ) : (
